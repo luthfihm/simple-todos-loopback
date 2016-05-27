@@ -1,0 +1,44 @@
+{
+  "name": "account",
+  "plural": "accounts",
+  "base": "User",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {},
+  "validations": [],
+  "relations": {
+    "agent": {
+      "type": "belongsTo",
+      "model": "agent",
+      "polymorphic": {
+        "foreignKey": "typeId",
+        "discriminator": "accountType"
+      }
+    },
+    "operator": {
+      "type": "belongsTo",
+      "model": "operator",
+      "polymorphic": {
+        "foreignKey": "typeId",
+        "discriminator": "accountType"
+      }
+    }
+  },
+  "acls": [
+    {
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "__get__agent"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "__get__operator"
+    }
+  ],
+  "methods": {}
+}
